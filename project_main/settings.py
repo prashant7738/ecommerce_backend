@@ -40,14 +40,19 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'store',
+    'rest_framework.authtoken',
 ]
 
 # a basic configuration to enable the browsable API for easy testing:
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

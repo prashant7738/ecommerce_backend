@@ -13,11 +13,16 @@ class ProductSerializer(serializers.ModelSerializer):
         
         
 class CustomerSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source="user.username", read_only=True)
+    email = serializers.CharField(source="user.email", read_only=True)
+    name = serializers.SerializerMethodField()
     class Meta:
         model = Customer
         fields = ['id', 'user', 'username', 'user_email', 'name', 'email']
         read_only_fields = ['user', 'username', 'user_email']
         
+    def get_name(self, obj):
+        return obj.user.first_name + " " + obj.user.last_name
         
         
         
