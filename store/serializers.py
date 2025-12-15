@@ -38,7 +38,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         # Note: 'product' is included for creating the OrderItem (POST request)
-        fields =['id', 'product', 'quantity', 'product_details', 'total_price']
+        fields =['id', 'product', 'quantity', 'total_price','product_details']
         
     # Calculates the subtotal for the item (Quantity * Product Price)
     def get_total_price(self, obj):
