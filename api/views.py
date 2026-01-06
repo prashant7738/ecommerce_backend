@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate
 from store.serializers import CustomerSerializer , ProductSerializer, OrderSerializer, OrderItemSerializer
 from store.models import Customer, Product, Order , OrderItem
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 
 
@@ -42,6 +43,9 @@ class CustomerViewSet(viewsets.GenericViewSet):
 
         if User.objects.filter(username=username).exists():
             return Response({'error': 'Username already exists'}, status=400)
+        
+        if User.objects.filter(email=email).exists():
+            return Response({'error': 'Email already exists'}, status=400)
 
         user = User.objects.create_user(
             username=username,
