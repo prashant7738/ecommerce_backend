@@ -41,15 +41,25 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+          
+    # for cloudinary 
+    
+    'cloudinary_storage', # must be above static file and cloudinary
+
+    'cloudinary', 
+
+
     'django.contrib.staticfiles',
+
+   
+
+
     'rest_framework',
     'api',
     'store',
     'rest_framework.authtoken',
 
-    # for cloudinarty
-    'cloudinary',
-    'cloudinary_storage',
+
 
 ]
 
@@ -157,4 +167,13 @@ CLOUDINARY_STORAGE = {
 'API_SECRET': env('CLOUDINARY_API_SECRET')
 }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STORAGES = {
+    # This controls where your uploaded media (images) go:
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    # This controls where your CSS/JS static files go:
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
